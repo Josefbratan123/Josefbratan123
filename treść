@@ -28,6 +28,183 @@ stock
 
 
 2
+Given a table of random numbers as follows:
+
+numbers table schema
+id
+number1
+number2
+Your job is to return table with similar structure and headings, where if the sum of a column is odd, the column shows the minimum value for that column, and when the sum is even, it shows the max value. You must use a case statement.
+
+output table schema
+number1
+number2
+
+
+
+3
+Given a demographics table in the following format:
+
+demographics table schema
+id
+name
+birthday
+race
+return a single column named calculation where the value is the bit length of name, added to the number of characters in race.
+
+
+
+4
+
+For this challenge you need to create a simple query to display each unique clan with their total points and ranked by their total points.
+
+people table schema
+name
+points
+clan
+You should then return a table that resembles below
+
+select on
+rank
+clan
+total_points
+total_people
+The query must rank each clan by their total_points, you must return each unqiue clan and if there is no clan name (i.e. it's an empty string) you must replace it with [no clan specified], you must sum the total_points for each clan and the total_people within that clan.
+
+##Note The data is loaded from the live leaderboard, this means values will change but also could cause the kata to time out retreiving the information.
+
+NOTE: You're solution should use pure SQL. Ruby is used within the test cases to do the actual testing.
+
+
+
+5
+
+
+
+For this challenge you need to create a simple SELECT statement that will return all columns from the people table, and join to the sales table so that you can return the COUNT of all sales and RANK each person by their sale_count.
+
+people table schema
+id
+name
+sales table schema
+id
+people_id
+sale
+price
+You should return all people fields as well as the sale count as "sale_count" and the rank as "sale_rank".
+
+NOTE: Your solution should use pure SQL. Ruby is used within the test cases to do the actual testing.
+
+
+
+6
+
+Given a payment table, which is a part of DVD Rental Sample Database, with the following schema
+
+Column       | Type                        | Modifiers
+-------------+-----------------------------+----------
+payment_id   | integer                     | not null 
+customer_id  | smallint                    | not null
+staff_id     | smallint                    | not null
+rental_id    | integer                     | not null
+amount       | numeric(5,2)                | not null
+payment_date | timestamp without time zone | not null
+produce a result set for the report that shows a side-by-side comparison of the number and total amounts of payments made in Mike's and Jon's stores broken down by months.
+
+The resulting data set should be ordered by month using natural order (Jan, Feb, Mar, etc.).
+
+Note: You don't need to worry about the year component. Months are never repeated because the sample data set contains payment information only for one year.
+
+The desired output for the report
+
+month | total_count | total_amount | mike_count | mike_amount | jon_count | jon_amount
+------+-------------+--------------+------------+-------------+-----------+-----------
+2     |             |              |            |             |           |           
+5     |             |              |            |             |           |           
+...
+month - number of the month (1 - January, 2 - February, etc.)
+total_count - total number of payments
+total_amount - total payment amount
+mike_count - total number of payments accepted by Mike (staff_id = 1)
+mike_amount - total amount of payments accepted by Mike (staff_id = 1)
+jon_count - total number of payments accepted by Jon (staff_id = 2)
+jon_amount - total amount of payments accepted by Jon (staff_id = 2)
+
+
+
+
+
+7 
+
+Given the following table 'decimals':
+
+decimals table schema
+id
+number1
+number2
+Return a table with a single column result which is the output of number1 raised to the power of number2.
+
+
+
+8
+
+You have access to a table of monsters as follows:
+
+monsters schema
+
+id
+name
+legs
+arms
+characteristics
+The monsters in the provided table have too many characteristics, they really only need one each. Your job is to trim the characteristics down so that each monster only has one. If there is only one already, provide that. If there are multiple, provide only the first one (don't leave any commas in there).
+
+You must return a table with the format as follows:
+
+output schema
+
+id
+name
+characteristic
+Order by id
+
+
+9
+
+Given the triangle of consecutive odd numbers:
+
+             1
+          3     5
+       7     9    11
+   13    15    17    19
+21    23    25    27    29
+...
+Calculate the sum of the numbers in the nth row of this triangle (starting at index 1) e.g.: (Input --> Output)
+
+1 -->  1
+2 --> 3 + 5 = 8
+
+
+
+10\
+
+
+In this kata you should simply determine, whether a given year is a leap year or not. In case you don't know the rules, here they are:
+
+Years divisible by 4 are leap years,
+but years divisible by 100 are not leap years,
+but years divisible by 400 are leap years.
+Tested years are in range 1600 ≤ year ≤ 4000.
+
+Notes
+Table years has two columns: id, and year.
+Your query has to return rows with two columns: year, and is_leap.
+Returned rows have to be sorted ascending by the year.
+
+
+
+
+
 
 
 
