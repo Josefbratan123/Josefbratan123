@@ -1,0 +1,186 @@
+SELECT
+    id,
+    name,
+    stock
+FROM
+    products
+WHERE
+    stock <= 2
+    AND producent = 'CompanyA'
+ORDER BY
+    id;
+
+
+
+
+
+SELECT
+    CASE WHEN SUM(number1) % 2 = 0 THEN MAX(number1) ELSE MIN(number1) END AS number1,
+    CASE WHEN SUM(number2) % 2 = 0 THEN MAX(number2) ELSE MIN(number2) END AS number2
+FROM
+    numbers;
+
+
+
+
+
+SELECT 
+    BIT_LENGTH(name) + CHAR_LENGTH(race) AS calculation
+FROM 
+    demographics;
+
+
+
+
+
+
+SELECT
+    RANK() OVER (ORDER BY SUM(points) DESC) AS rank,
+    CASE 
+        WHEN clan = '' THEN '[no clan specified]'
+        ELSE clan 
+    END AS clan,
+    SUM(points) AS total_points,
+    COUNT(*) AS total_people
+FROM
+    people
+GROUP BY
+    clan;
+
+
+
+
+
+
+
+
+SELECT
+    p.*,
+    COUNT(s.id) AS sale_count,
+    RANK() OVER (ORDER BY COUNT(s.id) DESC) AS sale_rank
+FROM
+    people p
+LEFT JOIN
+    sales s ON p.id = s.people_id
+GROUP BY
+    p.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT
+    EXTRACT(MONTH FROM payment_date) AS month,
+    COUNT(*) AS total_count,
+    SUM(amount) AS total_amount,
+    COUNT(CASE WHEN staff_id = 1 THEN 1 END) AS mike_count,
+    SUM(CASE WHEN staff_id = 1 THEN amount ELSE 0 END) AS mike_amount,
+    COUNT(CASE WHEN staff_id = 2 THEN 1 END) AS jon_count,
+    SUM(CASE WHEN staff_id = 2 THEN amount ELSE 0 END) AS jon_amount
+FROM
+    payment
+WHERE
+    staff_id IN (1, 2) -- Consider only Mike and Jon's stores
+GROUP BY
+    EXTRACT(MONTH FROM payment_date)
+ORDER BY
+    month;
+
+
+
+
+
+
+
+
+
+/*  SQL  */
+SELECT POWER(number1, number2) AS result
+FROM decimals;
+
+
+
+
+
+
+
+
+SELECT id,
+       name, 
+       split_part(characteristics, ',', 1) as characteristic
+  FROM monsters
+ORDER BY id\
+
+
+
+
+
+
+
+select
+  year,
+  case
+    when year%400=0 then true
+    when year%100=0 then false
+    when year%4=0 then true
+    else false
+  end as is_leap
+from years
+order by year
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+the table "nums" contains an integer "n", the number
+return your result in a column "res"
+*/
+
+CREATE OR REPLACE FUNCTION rowSumOddNumbers (n INTEGER) 
+	RETURNS INTEGER AS $$
+DECLARE
+   counter INTEGER := n ; 
+   total   INTEGER := 0 ; 
+   x       INTEGER := (n * (n - 1) + 1) ;
+BEGIN
+
+	IF (n < 1) THEN
+		RETURN 0 ;
+	END IF; 
+	
+	WHILE 0 < n LOOP
+    SELECT total + x into total;
+    
+    n := n - 1 ; 
+    x := x + 2;
+	END LOOP ; 
+	
+	RETURN total ;
+END ; $$
+LANGUAGE PLPGSQL;
+
+-- Call function for every N in nums.
+SELECT res.*
+		FROM nums,
+    LATERAL rowSumOddNumbers(nums.n) res
+
